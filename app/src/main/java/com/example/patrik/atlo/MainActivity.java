@@ -44,17 +44,17 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void Click(View V){
-        eredmeny Eredmeny = new eredmeny(oldalAEdit.getText().toString(), oldalBEdit.getText().toString(), oldalCEdit.getText().toString());
+        Eredmeny eredmeny = new Eredmeny(oldalAEdit.getText().toString(), oldalBEdit.getText().toString(), oldalCEdit.getText().toString());
     }
 
 
-    class eredmeny{
+    class Eredmeny{
 
         String aOldal;
         String bOldal;
         String cOldal;
 
-        public eredmeny(String aOldal, String bOldal, String cOldal) {
+        public Eredmeny(String aOldal, String bOldal, String cOldal) {
             this.aOldal = aOldal;
             this.bOldal = bOldal;
             this.cOldal = cOldal;
@@ -95,15 +95,23 @@ public class MainActivity extends AppCompatActivity {
                 dBefogo = Double.parseDouble(befogo);
                 dAtfogo = Double.parseDouble(atfogo);
 
-                dBefogo = dBefogo * dBefogo;
-                dAtfogo = dAtfogo * dAtfogo;
-                eredmeny = Math.sqrt(dAtfogo - dBefogo);
+                if ((dAtfogo != 0) && (dBefogo != 0)) {
+                    dBefogo = dBefogo * dBefogo;
+                    dAtfogo = dAtfogo * dAtfogo;
+                    eredmeny = Math.sqrt(dAtfogo - dBefogo);
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "A bemenet nem lehet 0!!!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
             }
             catch (Exception e){
                 Toast.makeText(MainActivity.this, "Karakterhiba!!!",Toast.LENGTH_LONG).show();
             }
 
             eredmeny = kerekit(eredmeny,3);
+
 
             if (!(eredmeny == 0)) {
                 edit.setText(eredmeny.toString());
@@ -121,9 +129,16 @@ public class MainActivity extends AppCompatActivity {
                 dBefogo1 = Double.parseDouble(befogo1);
                 dBefogo2 = Double.parseDouble(befogo2);
 
-                dBefogo1 = dBefogo1 * dBefogo1;
-                dBefogo2 = dBefogo2 * dBefogo2;
-                eredmeny = Math.sqrt(dBefogo1 + dBefogo2);
+                if ((dBefogo1 != 0) && (dBefogo2 != 0)) {
+                    dBefogo1 = dBefogo1 * dBefogo1;
+                    dBefogo2 = dBefogo2 * dBefogo2;
+                    eredmeny = Math.sqrt(dBefogo1 + dBefogo2);
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "A bemenet nem lehet 0!!!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
             }
             catch (Exception e){
                 Toast.makeText(MainActivity.this, "Karakterhiba!!!",Toast.LENGTH_LONG).show();
