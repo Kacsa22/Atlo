@@ -1,8 +1,11 @@
 package com.example.patrik.atlo;
 
+import android.app.Activity;
+import android.content.Context;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Button;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.view.View;
 import android.widget.Toast;
@@ -13,23 +16,37 @@ public class MainActivity extends AppCompatActivity {
     EditText oldalAEdit;
     EditText oldalBEdit;
     EditText oldalCEdit;
+    ConstraintLayout main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initGUI();
+        main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.hideSoftInputFromWindow(oldalBEdit.getWindowToken(), 0);
+                }
+            }
+        });
     }
+
 
     void initGUI(){
         oldalAEdit = findViewById(R.id.oldalAEdit);
         oldalBEdit = findViewById(R.id.oldalBEdit);
         oldalCEdit = findViewById(R.id.oldalCEdit);
+        main       = findViewById(R.id.main);
     }
+
 
     public void Click(View V){
         eredmeny Eredmeny = new eredmeny(oldalAEdit.getText().toString(), oldalBEdit.getText().toString(), oldalCEdit.getText().toString());
     }
+
 
     class eredmeny{
 
@@ -43,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
             this.cOldal = cOldal;
             ellenoriz();
         }
+
 
         void ellenoriz(){
 
@@ -67,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+
         void befogoszamol(String befogo, String atfogo, EditText edit){
 
             Double dBefogo, dAtfogo, eredmeny;
@@ -90,8 +109,8 @@ public class MainActivity extends AppCompatActivity {
                 edit.setText(eredmeny.toString());
             }
             else edit.setText("");
-
         }
+
 
         void atfogoszamol(String befogo1, String befogo2){
 
@@ -118,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
             else oldalCEdit.setText("");
         }
 
+
         double kerekit(double szam, int jegy){
             szam = szam * Math.pow(10, jegy);
             szam = Math.round(szam);
@@ -125,6 +145,4 @@ public class MainActivity extends AppCompatActivity {
             return szam;
         }
     }
-
-
 }
