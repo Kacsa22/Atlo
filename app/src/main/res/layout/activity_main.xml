@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:onClick="Click"
@@ -36,7 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/oldalBEdit" />
+        app:layout_constraintTop_toBottomOf="@+id/clrBButton" />
 
     <EditText
         android:id="@+id/oldalBEdit"
@@ -44,7 +44,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
@@ -57,7 +56,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="numberDecimal"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
@@ -70,10 +68,63 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="50dp"
         android:ems="10"
         android:inputType="numberDecimal"
         app:layout_constraintStart_toEndOf="@+id/oldalBEdit"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/alfaText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="40dp"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/betaText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="70dp"
+        android:text=""
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+    <ImageButton
+        android:id="@+id/clrAButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:onClick="clrA"
+        app:layout_constraintEnd_toEndOf="@+id/oldalAEdit"
+        app:layout_constraintTop_toBottomOf="@+id/oldalAEdit"
+        app:srcCompat="@drawable/baseline_clear_black_18dp" />
+
+    <ImageButton
+        android:id="@+id/clrBButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="clrB"
+        app:layout_constraintEnd_toEndOf="@+id/oldalBEdit"
+        app:layout_constraintStart_toStartOf="@+id/oldalBEdit"
+        app:layout_constraintTop_toBottomOf="@+id/oldalBEdit"
+        app:srcCompat="@drawable/baseline_clear_black_18dp" />
+
+    <ImageButton
+        android:id="@+id/clrCButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="clrC"
+        app:layout_constraintEnd_toEndOf="@+id/oldalCEdit"
+        app:layout_constraintStart_toStartOf="@+id/oldalCEdit"
+        app:layout_constraintTop_toBottomOf="@+id/oldalCEdit"
+        app:srcCompat="@drawable/baseline_clear_black_18dp" />
 
 </android.support.constraint.ConstraintLayout>

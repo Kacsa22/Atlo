@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -16,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
     EditText oldalAEdit;
     EditText oldalBEdit;
     EditText oldalCEdit;
+    TextView alfaText;
+    TextView betaText;
     ConstraintLayout main;
 
     @Override
@@ -40,21 +43,27 @@ public class MainActivity extends AppCompatActivity {
         oldalBEdit = findViewById(R.id.oldalBEdit);
         oldalCEdit = findViewById(R.id.oldalCEdit);
         main       = findViewById(R.id.main);
+        alfaText   = findViewById(R.id.alfaText);
+        betaText   = findViewById(R.id.betaText);
     }
 
 
     public void Click(View V){
-        Eredmeny eredmeny = new Eredmeny(oldalAEdit.getText().toString(), oldalBEdit.getText().toString(), oldalCEdit.getText().toString());
+        oldalEredmeny oldaleredmeny = new oldalEredmeny(oldalAEdit.getText().toString(), oldalBEdit.getText().toString(), oldalCEdit.getText().toString());
+        szogEredmeny szogEredmeny = new szogEredmeny(oldalAEdit.getText().toString(), oldalBEdit.getText().toString(), oldalCEdit.getText().toString());
+        alfaText.setText(szogEredmeny.getAlfa()+"°");
+        betaText.setText(szogEredmeny.getBeta()+"°");
+
     }
 
 
-    class Eredmeny{
+    class oldalEredmeny{
 
         String aOldal;
         String bOldal;
         String cOldal;
 
-        public Eredmeny(String aOldal, String bOldal, String cOldal) {
+        public oldalEredmeny(String aOldal, String bOldal, String cOldal) {
             this.aOldal = aOldal;
             this.bOldal = bOldal;
             this.cOldal = cOldal;
@@ -153,11 +162,67 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        double kerekit(double szam, int jegy){
-            szam = szam * Math.pow(10, jegy);
-            szam = Math.round(szam);
-            szam = szam / Math.pow(10, jegy);
-            return szam;
+    }
+
+    class szogEredmeny{
+        String aOldal;
+        String bOldal;
+        String cOldal;
+        Double alfa;
+        Double beta;
+
+        public szogEredmeny(String aOldal, String bOldal, String cOldal){
+            this.aOldal = aOldal;
+            this.bOldal = bOldal;
+            this.cOldal = cOldal;
+            if((aOldal != "") && (bOldal !="") && (cOldal != "")){
+                alfa = szogSzamol(this.aOldal, this.bOldal);
+                beta = szogSzamol(this.bOldal, this.aOldal);
+            }
+
+        }
+
+        Double szogSzamol(String oldal1, String oldal2){
+            Double dOldal1, dOldal2;
+            try {
+                dOldal1 = Double.parseDouble(oldal1);
+                dOldal2 = Double.parseDouble(oldal2);
+                return Math.toDegrees(Math.atan(dOldal1 / dOldal2));
+            }
+            catch (Exception e){
+                Toast.makeText(MainActivity.this,"Hiba",Toast.LENGTH_SHORT).show();
+                return null;
+            }
+        }
+
+        public String getAlfa() {
+            alfa = kerekit(alfa,3);
+            return String.valueOf(alfa);
+        }
+
+        public String getBeta() {
+            beta = kerekit(beta,3);
+            return String.valueOf(beta);
         }
     }
+
+    double kerekit(double szam, int jegy){
+        szam = szam * Math.pow(10, jegy);
+        szam = Math.round(szam);
+        szam = szam / Math.pow(10, jegy);
+        return szam;
+    }
+
+    public void clrA(View v){
+        oldalAEdit.setText("");
+    }
+
+    public void clrB(View v){
+        oldalBEdit.setText("");
+    }
+
+    public void clrC(View v){
+        oldalCEdit.setText("");
+    }
+
 }
